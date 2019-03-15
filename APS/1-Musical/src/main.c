@@ -1,10 +1,15 @@
-/** 
- ** Entrega realizada em parceria com:
- **  - Francisco Ciol Rodrigues Aveiro
- **  - Eric Fernando Otofuji Abrantes
- ** 
- **  - url vídeo
- **/
+/**
+** Entrega realizada em parceria com:
+**  - Francisco Ciol Rodrigues Aveiro
+**  - Eric Fernando Otofuji Abrantes
+**
+**  - url vídeo: https://youtu.be/PedGtK7MFJw
+**
+**	-Musicas
+**		-https://www.youtube.com/watch?v=1pOHf_N8CDY(Banana) - Pisca Regularmente
+**		-https://www.youtube.com/watch?v=y6120QOlsfU (Darude SandStorm) - Não Pisca
+**		-https://www.youtube.com/watch?v=27mB8verLK8 (Piratas do Caribe) - Pisca Irregular
+**/
 
 /************************************************************************/
 /* includes                                                             */
@@ -40,7 +45,7 @@
 /* constants                                                            */
 /************************************************************************/
 //Defining note frequency
-
+#define NOTE_G3	 198
 #define NOTE_A3  222
 #define NOTE_B3	 249
 #define NOTE_C4  262
@@ -182,8 +187,8 @@ int musica2[] = {
 	
 	NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_D4,
 	0,NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_E4,NOTE_D4,
-	NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_D4,NOTE_B3,
-	0,NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_E4,NOTE_D4,NOTE_A3,
+	NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_D4,NOTE_A3,
+	0,NOTE_A3,0,NOTE_D4,NOTE_CS4,NOTE_E4,NOTE_D4,NOTE_A3,
 	
 	NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_D4,
 	0,NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_E4,NOTE_D4,
@@ -192,8 +197,8 @@ int musica2[] = {
 	
 	NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_D4,
 	0,NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_E4,NOTE_D4,
-	NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_D4,NOTE_B3,
-	0,NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_E4,NOTE_D4,NOTE_A3,
+	NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_D4,NOTE_A3,
+	0,NOTE_A3,0,NOTE_D4,NOTE_CS4,NOTE_E4,NOTE_D4,NOTE_A3,
 	
 	NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_D4,
 	0,NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_E4,NOTE_D4,
@@ -202,8 +207,8 @@ int musica2[] = {
 	
 	NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_D4,
 	0,NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_E4,NOTE_D4,
-	NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_D4,NOTE_B3,
-	0,NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_E4,NOTE_D4,NOTE_A3,
+	NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_D4,NOTE_A3,
+	0,NOTE_A3,0,NOTE_D4,NOTE_CS4,NOTE_E4,NOTE_D4,NOTE_A3,
 	
 	NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_D4,
 	0,NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_E4,NOTE_D4,
@@ -212,18 +217,9 @@ int musica2[] = {
 	
 	NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_D4,
 	0,NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_E4,NOTE_D4,
-	NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_D4,NOTE_B3,
-	0,NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_E4,NOTE_D4,NOTE_A3,
+	NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_D4,NOTE_A3,
+	0,NOTE_A3,0,NOTE_D4,NOTE_CS4,NOTE_E4,NOTE_D4,NOTE_A3
 	
-	NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_D4,
-	0,NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_E4,NOTE_D4,
-	NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_D4,NOTE_B3,
-	0,NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_E4,NOTE_D4,NOTE_A3,
-	
-	NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_D4,
-	0,NOTE_D4,0,NOTE_FS4,NOTE_E4,NOTE_FS4,NOTE_E4,NOTE_D4,
-	NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_D4,NOTE_B3,
-	0,NOTE_B3,0,NOTE_D4,NOTE_CS4,NOTE_E4,NOTE_D4,NOTE_A3
 	
 	
 };
@@ -267,20 +263,39 @@ int tempo2[] = {
 	125,255,125,255,125,125,
 	125,125,125,125,125,125,125,125,
 	125,255,125,255,125,125,
-	125,125,125,125,125,125,125,125,
-	
-	125,255,125,255,125,125,
-	125,125,125,125,125,125,125,125,
-	125,255,125,255,125,125,
-	125,125,125,125,125,125,125,125,
-	
-	125,255,125,255,125,125,
-	125,125,125,125,125,125,125,125,
-	125,255,125,255,125,125,
 	125,125,125,125,125,125,125,125
 	
+};
+
+int musica3[] = {
+	NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_E5,0,
+	NOTE_E5,0,NOTE_E5,0,NOTE_E5,0,NOTE_D5,0,NOTE_D5,0,NOTE_D5,0,NOTE_D5,0,NOTE_A4,0,
+	
+	NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_E5,0,
+	NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_E5,0,
+	NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_E5,0,
+	
+	NOTE_E5,0,NOTE_E5,0,NOTE_E5,0,NOTE_D5,0,NOTE_D5,0,NOTE_D5,0,NOTE_D5,0,NOTE_A4,0,
+	NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_E5,0,
+	NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_B4,0,NOTE_E5,0
 	
 };
+
+
+int tempo3[] = {
+	380,5,125,5,255,5,255,5,380,5,125,5,255,5,255,5,
+	380,5,125,5,255,5,255,5,380,5,125,5,255,5,255,5,
+	
+	380,5,125,5,255,5,255,5,380,5,125,5,255,5,255,5,
+	380,5,125,5,255,5,255,5,380,5,125,5,255,5,255,5,
+	380,5,125,5,255,5,255,5,380,5,125,5,255,5,255,5,
+	
+	380,5,125,5,255,5,255,5,380,5,125,5,255,5,255,5,
+	380,5,125,5,255,5,255,5,380,5,125,5,255,5,255,5,
+	380,5,125,5,255,5,255,5,380,5,125,5,255,5,255,5
+};
+
+
 
 
 
@@ -319,6 +334,20 @@ void pisca(void) {
 	else if(qual == 0){
 		pio_set(LED_PIO,LED_PIO_IDX_MASK);
 		delay_ms(200);
+		pio_clear(LED_PIO,LED_PIO_IDX_MASK);
+		delay_ms(200);
+	}
+	else if(qual == 2){
+		pio_set(LED_PIO,LED_PIO_IDX_MASK);
+		delay_ms(200);
+		pio_clear(LED_PIO,LED_PIO_IDX_MASK);
+		delay_ms(200);
+		pio_set(LED_PIO,LED_PIO_IDX_MASK);
+		delay_ms(500);
+		pio_clear(LED_PIO,LED_PIO_IDX_MASK);
+		delay_ms(500);
+		pio_set(LED_PIO,LED_PIO_IDX_MASK);
+		delay_ms(500);
 		pio_clear(LED_PIO,LED_PIO_IDX_MASK);
 		delay_ms(200);
 	}
@@ -427,9 +456,13 @@ int main(void)
 		pio_clear(BUZZ_PIO,BUZZ_PIO_IDX_MASK);
 		pisca();
 		if(musica==true){
-			delay_s(1);
+			delay_ms(500);
 			if(qual==0){
 				qual = 1;
+				notaA = 0;
+			}
+			else if(qual==1){
+				qual = 2;
 				notaA = 0;
 			}
 			else{
@@ -443,17 +476,28 @@ int main(void)
 		
 		if(qual==0 && isPlaying==1){
 			while(notaA<(sizeof(musica2)/sizeof(musica2[0]))){
-				notaA = nota(musica2[notaA],tempo2[notaA],0.7,notaA);			
+				notaA = nota(musica2[notaA],tempo2[notaA],0.7,notaA);
 			}
 			notaA = 0;
 			isPlaying = 0;
 			pio_clear(BUZZ_PIO,BUZZ_PIO_IDX_MASK);
 		}
 		else if(qual==1 && isPlaying==1){
-			while(notaA<(sizeof(musica1)/sizeof(musica1[0]))){
-				notaA = nota(musica1[notaA],tempo1[notaA],0.7,notaA);
+			while(notaA<(sizeof(musica3)/sizeof(musica3[0]))){
+				notaA = nota(musica3[notaA],tempo3[notaA],1.3,notaA);
 				
 			}
+			
+			notaA = 0;
+			isPlaying = 0;
+			pio_clear(BUZZ_PIO,BUZZ_PIO_IDX_MASK);
+		}
+		else if(qual==2 && isPlaying==1){
+			while(notaA<(sizeof(musica1)/sizeof(musica1[0]))){
+				notaA = nota(musica1[notaA],tempo1[notaA],1.3,notaA);
+				
+			}
+			
 			notaA = 0;
 			isPlaying = 0;
 			pio_clear(BUZZ_PIO,BUZZ_PIO_IDX_MASK);
