@@ -9,6 +9,7 @@
 **		-https://www.youtube.com/watch?v=1pOHf_N8CDY(Banana) - Pisca Regularmente
 **		-https://www.youtube.com/watch?v=y6120QOlsfU (Darude SandStorm) - Não Pisca
 **		-https://www.youtube.com/watch?v=27mB8verLK8 (Piratas do Caribe) - Pisca Irregular
+**			Link do codigo do piratas do caribe: https://github.com/xitangg/-Pirates-of-the-Caribbean-Theme-Song/blob/master/Pirates_of_the_Caribbean_-_Theme_Song.ino
 **/
 
 /************************************************************************/
