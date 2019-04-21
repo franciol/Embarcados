@@ -62,6 +62,15 @@ t_ciclo c_centrifuga = {.nome = "Centrifuga",
 	.bubblesOn = 0,
 };
 
+t_ciclo c_teste = {.nome = "Teste",
+	.enxagueTempo = 1,
+	.enxagueQnt = 2,
+	.centrifugacaoRPM = 1200,
+	.centrifugacaoTempo = 1,
+	.heavy = 0,
+	.bubblesOn = 0,
+};
+
 
 
 /*

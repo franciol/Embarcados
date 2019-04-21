@@ -3,13 +3,13 @@
 **  - Francisco Ciol Rodrigues Aveiro
 **  - Eric Fernando Otofuji Abrantes
 **
-**  - url vídeo: https://youtu.be/PedGtK7MFJw
+**  - url vï¿½deo: https://youtu.be/PedGtK7MFJw
 **
 **	-Musicas
 **		-https://www.youtube.com/watch?v=1pOHf_N8CDY(Banana) - Pisca Regularmente
 **			(Red Velvet - Power Up)
 
-**		-https://www.youtube.com/watch?v=y6120QOlsfU (Darude SandStorm) - Não Pisca
+**		-https://www.youtube.com/watch?v=y6120QOlsfU (Darude SandStorm) - Nï¿½o Pisca
 **			(Darude Sandstorm)
 **		-https://www.youtube.com/watch?v=27mB8verLK8 (Piratas do Caribe) - Pisca Irregular
 **			(Musica tema de piratas do caribe - Klaus Badelt)
@@ -396,7 +396,7 @@ int nota(double freq, double tm,double velocidade,int notaAt)
 
 
 
-// Função de inicialização do uC
+// Funï¿½ï¿½o de inicializaï¿½ï¿½o do uC
 void init(void)
 {
 	isPlaying = 1;
@@ -455,7 +455,7 @@ int main(void)
 	WDT->WDT_MR = WDT_MR_WDDIS;
 	notaA = 0;
 	// super loop
-	// aplicacoes embarcadas não devem sair do while(1).
+	// aplicacoes embarcadas nï¿½o devem sair do while(1).
 	while (1)
 	{
 		pio_clear(BUZZ_PIO,BUZZ_PIO_IDX_MASK);
@@ -500,7 +500,6 @@ int main(void)
 		else if(qual==2 && isPlaying==1){
 			while(notaA<(sizeof(musica1)/sizeof(musica1[0]))){
 				notaA = nota(musica1[notaA],tempo1[notaA],1.3,notaA);
-				
 			}
 			
 			notaA = 0;
