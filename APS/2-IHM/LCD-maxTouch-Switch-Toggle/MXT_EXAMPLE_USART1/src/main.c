@@ -188,17 +188,14 @@ volatile char rtc_happen=0;
 volatile char rtc_sec_happen=0;
 volatile char stop_from_door=0;
 volatile char lockings=0;
+uint8_t total_time[32];
 
-volatile char open_door = 0;
-volatile int has_centrifug = 0;
-volatile int valvula_on = 0;
-volatile int minutes_to_finish, seconds_to_finish;
-volatile int enx_q = 0;
-volatile uint8_t total_time[32];
-volatile uint8_t enx_time[32];
-volatile uint8_t enx_quant[32];
-volatile uint8_t rpm[32];
-volatile uint8_t rpm_time[32];
+char open_door = 0;
+int has_centrifug = 0;
+int valvula_on = 0;
+int minutes_to_finish, seconds_to_finish;
+int enx_q = 0;
+
 volatile uint32_t YEAR2,MONTH2,DAY2,WEEK2,HOUR2,MINUTE2,SECOND2;
 volatile int enx_time_30 = 0;
 
@@ -271,6 +268,10 @@ void draw_text(){
 	ili9488_draw_string(320, 30, total_time);
 }
 void draw_button() {
+	uint8_t enx_time[32];
+	uint8_t enx_quant[32];
+	uint8_t rpm[32];
+	uint8_t rpm_time[32];
 	ili9488_set_foreground_color(COLOR_CONVERT(COLOR_WHITE));
 	ili9488_draw_pixmap(0, 0, Mast.width, Mast.height, Mast.data);
 	
