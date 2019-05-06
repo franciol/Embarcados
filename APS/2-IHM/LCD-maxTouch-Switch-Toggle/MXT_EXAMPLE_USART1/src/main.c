@@ -323,7 +323,7 @@ void draw_button() {
 	
 	
 	sprintf(enx_quant,"%d vezes",now_using->enxagueQnt);
-		
+	
 	
 	ili9488_draw_string(50, 90, enx_quant);
 	ili9488_draw_string(300, 90, enx_time);
@@ -604,7 +604,7 @@ void update_screen(uint32_t tx, uint32_t ty) {
 				pio_set(BUZZ_PIO,BUZZ_PIO_IDX_MASK);
 				
 				if(now_using->heavy){
-					enx_time_30 = ((now_using->enxagueTempo)-30)+ (now_using->enxagueTempo)/5;	
+					enx_time_30 = ((now_using->enxagueTempo)-30)+ (now_using->enxagueTempo)/5;
 				}
 				else{
 					enx_time_30 = ((now_using->enxagueTempo)-30);
@@ -743,7 +743,7 @@ int main(void)
 		if(rtc_happen){
 			
 			
-			//valvulas da bomba de �gua funcionam. Quando acaba, da 2s antes do outro enxague 
+			//valvulas da bomba de �gua funcionam. Quando acaba, da 2s antes do outro enxague
 			if(enx_q < (now_using->enxagueQnt)){
 				if(valvula_on==0){
 					valvula_on++;
@@ -756,12 +756,12 @@ int main(void)
 				else if(valvula_on){
 					pin_toggle(LED2_PIO,LED2_PIN_MASK);
 					valvula_on=0;
-					enx_q++;		
+					enx_q++;
 					rtc_get_date(RTC,&YEAR2,&MONTH2,&DAY2,&WEEK2);
 					rtc_get_time(RTC,&HOUR2,&MINUTE2,&SECOND2);
 					rtc_set_date_alarm(RTC, 1, MONTH2, 1, DAY2);
-					rtc_set_time_alarm(RTC, 1, HOUR2, 1, MINUTE2, 1, SECOND2+2);			
-				}	
+					rtc_set_time_alarm(RTC, 1, HOUR2, 1, MINUTE2, 1, SECOND2+2);
+				}
 			}
 			
 			else if(has_centrifug==0 && now_using->centrifugacaoRPM>0){
@@ -800,7 +800,7 @@ int main(void)
 			}
 			rtc_happen=0;
 		}
-			
+		
 		if(rtc_sec_happen){
 			pio_clear(BUZZ_PIO,BUZZ_PIO_IDX_MASK);
 			if(playing==0){
@@ -839,7 +839,7 @@ int main(void)
 		}
 		
 		
-			
+		
 		
 	}
 	return 0;
