@@ -179,6 +179,7 @@ volatile char locked = 0;
 volatile char touched = 0;
 volatile char rtc_happen=0;
 volatile char rtc_sec_happen=0;
+volatile char stop_from_door=0;
 
 volatile char open_door = 0;
 volatile int has_centrifug = 0;
@@ -204,13 +205,17 @@ void pin_toggle(Pio *pio, uint32_t mask){
 static void Button1_Handler(uint32_t id, uint32_t mask)
 {
 	if(open_door==1){
-		pio_set(LED_PIO,LED_PIN_MASK);
-		open_door=0;
+		pio_set(LED_PIO,LED_PIN_MASK);		
+		open_door=0;		
 	}
 	else{
 		open_door=1;
+		playing=0;
 		pio_clear(LED_PIO,LED_PIN_MASK);
+		pio_set(LED2_PIO,LED2_PIN_MASK);
+		rtc_disable_interrupt(RTC,RTC_IER_SECEN);
 	}
+	stop_from_door=1;
 }
 //Usando o TC1 para debounce no touch
 void TC1_Handler(void){
@@ -788,6 +793,10 @@ int main(void)
 			}
 			draw_button();
 			rtc_sec_happen=0;
+		}
+		if(stop_from_door){
+			draw_button();
+			stop_from_door=0;
 		}
 		
 		
