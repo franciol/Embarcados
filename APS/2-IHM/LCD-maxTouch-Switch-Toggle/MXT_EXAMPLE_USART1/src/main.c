@@ -161,6 +161,12 @@ Icon made by Smashicons from www.flaticon.com - clock
 #define BUT_PIN				  28
 #define BUT_PIN_MASK	(1 << BUT_PIN)
 
+//Button 2 PC31 - Trava Externa
+#define BUT2_PIO_ID			  ID_PIOC
+#define BUT2_PIO				  PIOC
+#define BUT2_PIN				  31
+#define BUT2_PIN_MASK	(1 << BUT2_PIN)
+
 //Buzzer PD22 - Alarme Sonoro
 #define BUZZ_PIO           PIOD
 #define BUZZ_PIO_ID        ID_PIOD
@@ -180,6 +186,7 @@ volatile char touched = 0;
 volatile char rtc_happen=0;
 volatile char rtc_sec_happen=0;
 volatile char stop_from_door=0;
+volatile char lockings=0;
 
 volatile char open_door = 0;
 volatile int has_centrifug = 0;
@@ -205,8 +212,8 @@ void pin_toggle(Pio *pio, uint32_t mask){
 static void Button1_Handler(uint32_t id, uint32_t mask)
 {
 	if(open_door==1){
-		pio_set(LED_PIO,LED_PIN_MASK);		
-		open_door=0;		
+		pio_set(LED_PIO,LED_PIN_MASK);
+		open_door=0;
 	}
 	else{
 		open_door=1;
@@ -216,6 +223,16 @@ static void Button1_Handler(uint32_t id, uint32_t mask)
 		rtc_disable_interrupt(RTC,RTC_IER_SECEN);
 	}
 	stop_from_door=1;
+}
+static void Button2_Handler(uint32_t id, uint32_t mask)
+{
+	if(locked==1){
+		locked=0;
+	}
+	else{
+		locked=1;
+	}
+	lockings=1;
 }
 //Usando o TC1 para debounce no touch
 void TC1_Handler(void){
@@ -369,17 +386,23 @@ void RTC_Handler(void)
 void BUT_init(void){
 	/* config. pino botao em modo de entrada */
 	pmc_enable_periph_clk(BUT_PIO_ID);
+	pmc_enable_periph_clk(BUT2_PIO_ID);
 	pio_set_input(BUT_PIO, BUT_PIN_MASK, PIO_PULLUP | PIO_DEBOUNCE);
+	pio_set_input(BUT2_PIO, BUT2_PIN_MASK, PIO_PULLUP | PIO_DEBOUNCE);
 
 	/* config. interrupcao em borda de descida no botao do kit */
 	/* indica funcao (but_Handler) a ser chamada quando houver uma interrup��o */
 	pio_enable_interrupt(BUT_PIO, BUT_PIN_MASK);
+	pio_enable_interrupt(BUT2_PIO, BUT2_PIN_MASK);
 	pio_handler_set(BUT_PIO, BUT_PIO_ID, BUT_PIN_MASK, PIO_IT_FALL_EDGE, Button1_Handler);
+	pio_handler_set(BUT2_PIO, BUT2_PIO_ID, BUT2_PIN_MASK, PIO_IT_FALL_EDGE, Button2_Handler);
 
 	/* habilita interrup�c�o do PIO que controla o botao */
 	/* e configura sua prioridade                        */
 	NVIC_EnableIRQ(BUT_PIO_ID);
 	NVIC_SetPriority(BUT_PIO_ID, 1);
+	NVIC_EnableIRQ(BUT2_PIO_ID);
+	NVIC_SetPriority(BUT2_PIO_ID, 2);
 };
 void LED_init(int estado){
 	pmc_enable_periph_clk(LED_PIO_ID);
@@ -535,11 +558,7 @@ uint32_t convert_axis_system_y(uint32_t touch_x) {
 void update_screen(uint32_t tx, uint32_t ty) {
 	if (locked)
 	{
-		if(tx >= 120 && tx <= 240)
-		{
-			locked = 0;
-			draw_button();			
-			}
+		PASS;
 	}
 	else if(ty >= BUTTON_Y && ty <= BUTTON_Y+BUTTON_H) {
 		
@@ -797,6 +816,16 @@ int main(void)
 		if(stop_from_door){
 			draw_button();
 			stop_from_door=0;
+			pio_set(LED4_PIO,LED4_PIN_MASK);
+			pio_set(LED3_PIO,LED3_PIN_MASK);
+			pio_set(LED2_PIO,LED2_PIN_MASK);
+			pmc_disable_periph_clk(ID_TC4);
+			NVIC_DisableIRQ((IRQn_Type) ID_TC4);
+			rtc_disable_interrupt(RTC,  RTC_IER_SECEN);
+		}
+		if(lockings){
+			lockings=0;
+			draw_button();
 		}
 		
 		
