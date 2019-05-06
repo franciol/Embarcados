@@ -185,7 +185,7 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/config/conf_board.h ../src/config/conf_example.h \
  ../src/Icons/Mast.h ../src/Icons/struct_image.h ../src/Icons/play.h \
  ../src/Icons/pause.h ../src/Icons/padlocked.h ../src/Icons/padlock.h \
- ../src/maquina1.h
+ ../src/Icons/blankText.h ../src/maquina1.h
 
 ../src/asf.h:
 
@@ -588,5 +588,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/Icons/padlocked.h:
 
 ../src/Icons/padlock.h:
+
+../src/Icons/blankText.h:
 
 ../src/maquina1.h:

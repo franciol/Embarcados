@@ -108,6 +108,7 @@ Icon made by Smashicons from www.flaticon.com - clock
 #include "Icons/pause.h"
 #include "Icons/padlocked.h"
 #include "Icons/padlock.h"
+#include "Icons/blankText.h"
 #include "maquina1.h"
 
 
@@ -257,8 +258,19 @@ void TC4_Handler(void){
 	pin_toggle(LED3_PIO, LED3_PIN_MASK);
 	UNUSED(ul_dummy);
 }
-void draw_button() {
+void draw_text(){
+	ili9488_set_foreground_color(COLOR_CONVERT(COLOR_WHITE));
+	ili9488_draw_rectangle(320,30,480,60);
+	ili9488_set_foreground_color(COLOR_CONVERT(COLOR_BLACK));
 	
+	if (playing==1)
+	{
+		sprintf(total_time,"%3d:%2d",minutes_to_finish,seconds_to_finish);
+		ili9488_draw_pixmap(320,30,blankText.width,blankText.height,blankText.data);
+	}
+	ili9488_draw_string(320, 30, total_time);
+}
+void draw_button() {
 	ili9488_set_foreground_color(COLOR_CONVERT(COLOR_WHITE));
 	ili9488_draw_pixmap(0, 0, Mast.width, Mast.height, Mast.data);
 	
@@ -304,14 +316,10 @@ void draw_button() {
 	else {
 		ili9488_draw_string(300, 175, "Off");
 	}
-	if (playing==1)
-	{
-		sprintf(total_time,"%3d:%2d",minutes_to_finish,seconds_to_finish);
-		
-	}
+	
 	//Principal
 	ili9488_draw_string(80, 30, now_using->nome);
-	ili9488_draw_string(320, 30, total_time);
+	//ili9488_draw_string(320, 30, total_time);
 	
 	
 	sprintf(enx_quant,"%d vezes",now_using->enxagueQnt);
@@ -322,11 +330,13 @@ void draw_button() {
 	
 	
 	sprintf(rpm,"%4d rpm",now_using->centrifugacaoRPM);
-
+	
+	draw_text();
 	ili9488_draw_string(50, 135, rpm);
 	ili9488_draw_string(300, 135, rpm_time);
 	pmc_enable_periph_clk(ID_TC1);
 }
+
 void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 	uint32_t ul_div;
 	uint32_t ul_tcclks;
@@ -810,7 +820,7 @@ int main(void)
 			else{
 				seconds_to_finish--;
 			}
-			draw_button();
+			draw_text();
 			rtc_sec_happen=0;
 		}
 		if(stop_from_door){
