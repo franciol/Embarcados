@@ -686,18 +686,7 @@ void mxt_handler(struct mxt_device *device)
 		usart_serial_write_packet(USART_SERIAL_EXAMPLE, (uint8_t *)tx_buf, strlen(tx_buf));
 	}
 }
-int main(void)
-{
-	struct mxt_device device; /* Device data container */
-
-	/* Initialize the USART configuration struct */
-	const usart_serial_options_t usart_serial_options = {
-		.baudrate     = USART_SERIAL_EXAMPLE_BAUDRATE,
-		.charlength   = USART_SERIAL_CHAR_LENGTH,
-		.paritytype   = USART_SERIAL_PARITY,
-		.stopbits     = USART_SERIAL_STOP_BIT
-	};
-	
+void preset_init(){
 	c_rapido.next = &c_diario;
 	c_rapido.previous = &c_teste;
 
@@ -715,6 +704,20 @@ int main(void)
 	
 	c_teste.next = &c_rapido;
 	c_teste.previous = &c_centrifuga;
+}
+int main(void)
+{
+	struct mxt_device device; /* Device data container */
+
+	/* Initialize the USART configuration struct */
+	const usart_serial_options_t usart_serial_options = {
+		.baudrate     = USART_SERIAL_EXAMPLE_BAUDRATE,
+		.charlength   = USART_SERIAL_CHAR_LENGTH,
+		.paritytype   = USART_SERIAL_PARITY,
+		.stopbits     = USART_SERIAL_STOP_BIT
+	};
+	
+	
 
 	sysclk_init(); /* Initialize system clocks */
 	board_init();  /* Initialize board */
@@ -724,7 +727,7 @@ int main(void)
 	/* Initialize the mXT touch device */
 	mxt_init(&device);
 	TC_init(TC0, ID_TC1, 1, 1);
-	
+	preset_init();
 	LED_init(1);
 	BUT_init();
 	pio_clear(BUZZ_PIO,BUZZ_PIO_IDX_MASK);
